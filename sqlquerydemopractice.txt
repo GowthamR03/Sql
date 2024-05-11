@@ -1,0 +1,224 @@
+create database DemoPractice
+
+use DemoPractice;
+
+create table firsttable(
+ID int,
+EmpName varchar(255),
+City varchar(255),
+salary int
+);	
+
+insert into firsttable(ID,EmpName,City,salary)
+values('11','Gowtham','chennai','7000');
+
+select * from firsttable;
+
+select ID,EmpName from firsttable;
+
+select distinct city from firsttable;
+
+
+select distinct city from firsttable where salary=2000
+select * from firsttable where salary=2000
+select * from firsttable where salary>100
+--create database 
+create database DemoPractice
+
+
+use DemoPractice;
+
+--list database
+
+SELECT name, database_id, create_date  
+FROM sys.databases;  
+GO  
+SELECT * FROM sys.databases;
+--table creation
+
+create table firsttable (
+ID int,
+EmpName varchar(255),
+City varchar(255),
+salary int
+);
+
+--value to table
+insert into firsttable(ID,EmpName,City,salary)
+values('3','sam','delhi','1000');
+
+select * from firsttable;
+select ID,EmpName from firsttable;
+
+--distinct hide the same data
+
+select distinct city from firsttable where salary=2000
+
+--where to filter
+
+select * from firsttable where salary=2000
+select * from firsttable where salary>100
+
+--order to sort in asc
+
+select * from firsttable order by salary Desc
+select * from firsttable order by city,salary
+
+--operator 
+
+select * from firsttable where salary>100 AND city='delhi'
+select * from firsttable where city='delhi' or city='chennai'
+select * from firsttable where not salary=7000
+select * from firsttable where salary not in (1200)
+select * from firsttable where salary between 100 and 6000
+select * from firsttable where salary not between 100 and 6000
+select * from firsttable where salary between 100 and 10000 order by salary
+select * from firsttable where city like 'c%'
+select * from firsttable where city like '%i'
+select * from firsttable where city like '_h%'
+
+--function
+
+select min(salary) as result  from firsttable
+select max(salary) as result  from firsttable
+select sum(salary) from firsttable
+select sum(salary)  from firsttable where salary>100
+select avg(salary) from firsttable
+select avg(salary) from firsttable where salary >6000
+select count(*) from firsttable
+
+
+-- table with null 
+
+
+create table secontable(
+ID int not null,
+epname varchar(255) not null,
+city varchar(255),
+salary int);
+
+insert into secontable(ID,epname,city,salary)
+values('1','ajay','tiruchi','10000')
+insert into secontable(ID,epname,city,salary)
+values('2','bharath','neyveli','40000')
+insert into secontable(ID,epname,city,salary)
+values('3','vijay','odc','20000')
+insert into secontable(ID,epname,city,salary)
+values('4','tamilan','odc','30000')
+insert into secontable(ID,epname,city,salary)
+values('5','irai','chennai','60000')
+insert into secontable(ID,epname,city,salary)
+values('6','ram','chennai','40000')
+insert into secontable(ID,epname,city,salary)
+values('7','sam','odc','25000')
+insert into secontable(ID,epname,city,salary,age)
+values('8','ashwin','thoothukudi','35000','21')
+
+
+select * from secontable
+
+--alias 
+
+select epname as Myresult from secontable
+
+
+-- update and alter
+
+alter table secontable add Age int ;
+alter table secontable drop column Age
+alter table secontable drop row where ID =1
+
+update secontable set age =16 where id=1 
+update secontable set age =10 where id=7 
+update secontable set age =17 where id=4 
+update secontable set age =15   where id=1
+
+select * from Secontable order by age
+select * from Secontable
+
+--delete 
+delete from secontable where id=1
+
+
+--strore procedure 
+
+
+select * from secontable
+create procedure firstprocedure
+as 
+select * from secontable
+Go;
+exec firstprocedure;
+
+create procedure secprocedure @salary int
+as 
+select * from secontable where salary=@salary;
+
+exec secprocedure @salary=10000
+
+create procedure thrprocedure @city varchar(255)
+as 
+select * from secontable where city=@city;
+
+exec thrprocedure @city= 'odc'
+
+
+create procedure seeprocedure @salary int,@city varchar(255)
+as 
+select * from secontable where salary=@salary and city=@city;
+
+exec seeprocedure @salary=20000, @city= 'odc'
+
+
+select * from secontable
+
+
+--backup all data
+
+select * into firsttablebackup from firsttable;
+
+--backup empname data
+
+select empname into firsttablebackup from firsttable;
+
+select * from firsttable
+select * from secontable
+select * from firsttablebackup
+
+--top 2  record 
+
+select top 2 * from secontable
+
+select top 2 * from secontable where salary > 1000
+
+
+--top 50 percentage record 
+
+select top 50 percent * from secontable
+
+
+--backup database
+
+
+backup database DemoPractice 
+ to disk='C:\Users\rgowtham\Documents\SQL Server Management Studio\backup practice\backupfirst.bak';
+
+
+ --view 
+
+ create view [salary above 1000] as 
+ select epname,city,salary from secontable
+ where salary > 1000;
+ select * from [salary above 1000];
+
+ Drop view [salary above 1000];
+
+
+
+
+
+F5, CTRL + E or ALT + X — Execute the currently selected code.
+CTRL + R — Show/hide the Results pane.
+CTRL + N — Open a new query window.
+CTRL + L — Display the query execution plan.
+CTRL + SHIFT + Q– Display the query designer.
